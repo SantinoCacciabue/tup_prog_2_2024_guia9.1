@@ -56,11 +56,15 @@
     <Compile Include="models\EvaluacionParametrica.cs" />
     <Compile Include="models\EvaluacionSimple.cs" />
     <Compile Include="models\FiscalizadorVTV.cs" />
+    <Compile Include="models\PatenteInvalidaException.cs" />
     <Compile Include="models\Propietario.cs" />
     <Compile Include="models\TipoAprobación.cs" />
     <Compile Include="models\VTV.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

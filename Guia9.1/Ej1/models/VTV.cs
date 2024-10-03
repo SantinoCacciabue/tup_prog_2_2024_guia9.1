@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Ej1.models
@@ -45,14 +46,19 @@ namespace Ej1.models
         {
             Patente = patente;
             propietario = p;
-
+            string pat = patente.Replace("-", "").Trim().ToUpper();
+            Match a = Regex.Match(pat, @"^[A-Z]{2}\d{3}[A-Z]{2}$");
+            Match b = Regex.Match(pat, @"^[A-Z]{3}\d{3}$");
+            if (!a.Success && !b.Success)
+            {
+                throw new PatenteInvalidaException();
+            }
             verificaciones = new List<Evaluacion> {new EvaluacionSimple("Bocina","Funcionamiento correcto"),
         new EvaluacionParametrica(0.30,1,0.30*0.7,"Porcentaje","Prueba de frenos delanteros","Porcentaje de diferencia de frenado entre ejes"),
         new EvaluacionParametrica(0.30,1,0.30*0.7,"Porcentaje","Prueba de frenos traseros","Porcentaje de diferencia de frenado entre ejes"),
         new EvaluacionParametrica(0.0,0.5,0-(0.5*0.3),"Grado","Alineación","Convergencia en grados"),
         new EvaluacionParametrica(10000,15000,10000*0.7,"Candela","Luces de corto alcante","Intensidad lumínica"),
         new EvaluacionParametrica(30000,40000,30000*0.7,"Candela","Luces de largo alcante","Intensidad lumínica")};
-
         }
         public string[] EmitirComprobante()
         {
@@ -67,12 +73,36 @@ namespace Ej1.models
 
         public int CompareTo(object obj)
         {
-            VTV a = obj as VTV;
+            Propietario a = obj as Propietario;
             if (a != null)
             {
-                return Patente.CompareTo(a.Patente);
+                return propietario.DNI.CompareTo(a.DNI);
             }
             return -1;
+        }
+        private DateTime FechaRevalidacion()
+        {
+            DateTime fecha = Fecha;
+            int i = 0;
+            while (i < 20)
+            {
+                if (fecha.DayOfWeek != DayOfWeek.Sunday || fecha.DayOfWeek != DayOfWeek.Saturday)
+                {
+                    i++;
+                }
+                fecha = fecha.AddDays(1);
+            }
+            return fecha;
+        }
+        public override string ToString()
+        {
+            string a = $"{Patente}-{Aprobacion}-{Fecha}";
+            if(Aprobacion==TipoAprobación.Parcial)
+            {
+               
+                return $"{a}Fecha Revalidación: {FechaRevalidacion()}";
+            }
+            return a;
         }
     }
 }

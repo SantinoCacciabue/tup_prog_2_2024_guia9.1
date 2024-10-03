@@ -18,7 +18,6 @@ namespace Ej1.models
             ValorMinimo = valorMinimo;
             ValorMaximo = valorMaximo;
             ValorTolerado = valorTolerado;
-            ValorMedido = valorMedido;
             Unidad = unidad;
         }
         public override TipoAprobación Evaluar()
