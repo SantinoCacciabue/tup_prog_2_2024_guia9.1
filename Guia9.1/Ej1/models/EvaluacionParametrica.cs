@@ -22,22 +22,29 @@ namespace Ej1.models
         }
         public override TipoAprobación Evaluar()
         {
-            if (ValorMedido < ValorMinimo * 0.7)
+            double valor70 = ValorMaximo * (1 - ValorTolerado / 100);
+            double valor130=ValorMinimo * (1 + ValorTolerado / 100);
+            if (ValorMedido < valor70)
             {
                 return TipoAprobación.NoAprobado;
             }
-            else
+            else if (ValorMedido < ValorMinimo)
             {
-                if (ValorMedido > ValorMinimo * 0.7 && ValorMedido < ValorMinimo)
-                {
-                    return TipoAprobación.Parcial;
-                }
+                return TipoAprobación.Parcial;
+            }
+            else if (ValorMedido <= ValorMaximo)
+            {
+                return TipoAprobación.Aprobado;
+            }
+            else if (ValorMedido < valor130)
+            {
+                return TipoAprobación.Aprobado;
             }
             return TipoAprobación.Aprobado;
         }
         public override string ToString()
         {
-            return $"Prueba de {Nombre}-{Descripcion}-Porcentaje:{Unidad}-{Evaluar()}";
+            return $"Prueba de {Nombre}-{Descripcion}-Porcentaje:{Unidad}-{Evaluar()}\r\n";
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Ej1.models
         private List<Evaluacion> verificaciones = new List<Evaluacion>();
 
         public string Patente {  get; private set; }
-        public DateTime Fecha { get; private set; }
+        public DateTime Fecha { get;  set; }
         public  int CantidadVerificaciones
         {
             get
@@ -96,7 +96,7 @@ namespace Ej1.models
         }
         public override string ToString()
         {
-            string a = $"{Patente}-{Aprobacion}-{Fecha}";
+            string a = $"{Patente}-{Aprobacion}-{Fecha}\r\n";
             if(Aprobacion==TipoAprobación.Parcial)
             {
                

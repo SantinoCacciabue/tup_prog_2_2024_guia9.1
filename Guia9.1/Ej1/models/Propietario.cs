@@ -2,16 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Ej1.models
 {
     internal class Propietario
     {
-       public string DNI {  get; set; }
+        private string email;
+        private int dni;
+        public int DNI
+        {
+            get { return dni; }
+            set
+            {
+                if (value < 1000000)
+                {
+                    throw new DniInvalidoException();
+                }
+                dni = value;
+            }
+        }
         public string ApellidoNombres{get; set; }
-        public string Email {  get; set; }
-        public Propietario(string dNI, string apellidoNombres, string email)
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                //Match a = Regex.Match(value, @"^[a-zA-Z0-9]+@+\.[a-zA-Z]{2,}\.com\.[a-zA-Z]{2}$");
+                //if (!a.Success)
+                //{
+                //    throw new EmailInvalidoException();
+                //}
+                //email = value;
+            }
+        }
+        public Propietario(int dNI, string apellidoNombres, string email)
         {
             DNI = dNI;
             ApellidoNombres = apellidoNombres;

@@ -8,7 +8,7 @@ namespace Ej1.models
 {
     internal class EvaluacionSimple:Evaluacion
     {
-        public bool HaVerificado {  get; private set; }
+        public bool HaVerificado {  get; set; }
         public EvaluacionSimple(string n, string d):base(n, d) { }
         public override TipoAprobación Evaluar()
         {
@@ -20,7 +20,7 @@ namespace Ej1.models
         }
         public override string ToString()
         {
-            return $"Prueba de {Descripcion}, Resultado:{Evaluar()}";
+            return $"Prueba de {Descripcion}, Resultado:{Evaluar()}\r\n";
         }
     }
 }
