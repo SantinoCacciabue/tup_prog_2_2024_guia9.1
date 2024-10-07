@@ -20,7 +20,7 @@ namespace Ej1.models
         }
         public override string ToString()
         {
-            return $"Prueba de {Descripcion}, Resultado:{Evaluar()}\r\n";
+            return $"Prueba de {Nombre}-{Descripcion}, Resultado:{Evaluar()}\r\n";
         }
     }
 }

@@ -69,17 +69,18 @@ namespace Ej1
             int i = 0;
             FormEvaluacion ev;
             FormVer ver = new FormVer();
-            while(i<vtv.CantidadVerificaciones)
+            vtv.Fecha = hoy;
+            while (i<vtv.CantidadVerificaciones)
             {
                 ev = new FormEvaluacion();               
-                Evaluacion eval = vtv[i];
-                vtv.Fecha = hoy;
+                Evaluacion eval = vtv[i];              
                 ev.tBnombre.Text = eval.Nombre;
                 ev.tBdesc.Text = eval.Descripcion;
+
                 if (eval is EvaluacionParametrica)
                 {
                     EvaluacionParametrica evalu = (EvaluacionParametrica)eval;
-                    
+                    ev.lUnidad.Text = evalu.Unidad;
                     ev.groupBox2.Enabled = false;                    
                     ev.tBminimo.Enabled = false;
                     ev.tBmaximo.Enabled = false;
@@ -102,12 +103,23 @@ namespace Ej1
                         bool correcto = ev.cBfunciona.Checked;
                         evalu.HaVerificado = correcto;
                     }
-                }
+                }              
                 ver.tBdatos.Text += eval.ToString();
                 i++;                               
             }
             ver.tBdatos.Text += FiscalizadorVTV.AgregarVTV(p, pat).ToString();
             ver.ShowDialog();
+        }
+
+        private void btnVer_Click(object sender, EventArgs e)
+        {
+            FormVer ver = new FormVer();
+            for(int i = 0; i < FiscalizadorVTV.CantidadVTV; i++)
+            {
+                ver.tBdatos.Text += FiscalizadorVTV[i].ToString();
+            }
+            ver.ShowDialog();
+            
         }
     }
 }

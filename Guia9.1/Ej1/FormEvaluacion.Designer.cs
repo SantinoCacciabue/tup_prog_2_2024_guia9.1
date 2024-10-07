@@ -34,15 +34,15 @@
             this.tBnombre = new System.Windows.Forms.TextBox();
             this.tBdesc = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lUnidad = new System.Windows.Forms.Label();
-            this.tBminimo = new System.Windows.Forms.TextBox();
-            this.tBmaximo = new System.Windows.Forms.TextBox();
             this.tBmedido = new System.Windows.Forms.TextBox();
+            this.tBmaximo = new System.Windows.Forms.TextBox();
+            this.tBminimo = new System.Windows.Forms.TextBox();
+            this.lUnidad = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cBfunciona = new System.Windows.Forms.CheckBox();
             this.bSiguiente = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -115,42 +115,35 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Evaluación paramétrica";
             // 
-            // groupBox2
+            // tBmedido
             // 
-            this.groupBox2.Controls.Add(this.cBfunciona);
-            this.groupBox2.Location = new System.Drawing.Point(12, 202);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(399, 49);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Evaluación simple";
+            this.tBmedido.Location = new System.Drawing.Point(238, 143);
+            this.tBmedido.Name = "tBmedido";
+            this.tBmedido.Size = new System.Drawing.Size(81, 20);
+            this.tBmedido.TabIndex = 7;
             // 
-            // label1
+            // tBmaximo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 146);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Valores";
+            this.tBmaximo.Location = new System.Drawing.Point(151, 143);
+            this.tBmaximo.Name = "tBmaximo";
+            this.tBmaximo.Size = new System.Drawing.Size(81, 20);
+            this.tBmaximo.TabIndex = 6;
             // 
-            // label3
+            // tBminimo
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(85, 127);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Mínimo";
+            this.tBminimo.Location = new System.Drawing.Point(64, 143);
+            this.tBminimo.Name = "tBminimo";
+            this.tBminimo.Size = new System.Drawing.Size(81, 20);
+            this.tBminimo.TabIndex = 5;
             // 
-            // label4
+            // lUnidad
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(175, 127);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Máximo";
+            this.lUnidad.AutoSize = true;
+            this.lUnidad.Location = new System.Drawing.Point(334, 146);
+            this.lUnidad.Name = "lUnidad";
+            this.lUnidad.Size = new System.Drawing.Size(13, 13);
+            this.lUnidad.TabIndex = 4;
+            this.lUnidad.Text = "--";
             // 
             // label5
             // 
@@ -162,35 +155,42 @@
             this.label5.Text = "Valor Medido";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // lUnidad
+            // label4
             // 
-            this.lUnidad.AutoSize = true;
-            this.lUnidad.Location = new System.Drawing.Point(346, 150);
-            this.lUnidad.Name = "lUnidad";
-            this.lUnidad.Size = new System.Drawing.Size(13, 13);
-            this.lUnidad.TabIndex = 4;
-            this.lUnidad.Text = "--";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(175, 127);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Máximo";
             // 
-            // tBminimo
+            // label3
             // 
-            this.tBminimo.Location = new System.Drawing.Point(64, 143);
-            this.tBminimo.Name = "tBminimo";
-            this.tBminimo.Size = new System.Drawing.Size(81, 20);
-            this.tBminimo.TabIndex = 5;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(85, 127);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Mínimo";
             // 
-            // tBmaximo
+            // label1
             // 
-            this.tBmaximo.Location = new System.Drawing.Point(151, 143);
-            this.tBmaximo.Name = "tBmaximo";
-            this.tBmaximo.Size = new System.Drawing.Size(81, 20);
-            this.tBmaximo.TabIndex = 6;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 146);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Valores";
             // 
-            // tBmedido
+            // groupBox2
             // 
-            this.tBmedido.Location = new System.Drawing.Point(238, 143);
-            this.tBmedido.Name = "tBmedido";
-            this.tBmedido.Size = new System.Drawing.Size(81, 20);
-            this.tBmedido.TabIndex = 7;
+            this.groupBox2.Controls.Add(this.cBfunciona);
+            this.groupBox2.Location = new System.Drawing.Point(12, 202);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(399, 49);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Evaluación simple";
             // 
             // cBfunciona
             // 
@@ -243,7 +243,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lUnidad;
         public System.Windows.Forms.TextBox tBminimo;
         public System.Windows.Forms.TextBox tBmedido;
         public System.Windows.Forms.TextBox tBmaximo;
@@ -251,5 +250,6 @@
         public System.Windows.Forms.Button bSiguiente;
         public System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.Label lUnidad;
     }
 }

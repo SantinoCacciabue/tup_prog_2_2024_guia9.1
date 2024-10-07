@@ -97,6 +97,10 @@ namespace Ej1.models
         public override string ToString()
         {
             string a = $"{Patente}-{Aprobacion}-{Fecha}\r\n";
+            if(Aprobacion==TipoAprobación.Aprobado)
+            {
+                return $"{a}Fecha Vencimiento: {Fecha.AddYears(1)}";
+            }
             if(Aprobacion==TipoAprobación.Parcial)
             {
                
