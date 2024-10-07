@@ -47,14 +47,58 @@ namespace Ej1
         #endregion 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            string nom = tBnombre.Text;
-            int dni = Convert.ToInt32(tBdni.Text);
-            string email = tBemail.Text;
-            Propietario p = null;
             try
             {
+                Propietario p = null;
+                string nom = tBnombre.Text;
+                int dni = Convert.ToInt32(tBdni.Text);
+                string email = tBemail.Text;              
+                string pat = tBpatente.Text;
                 p = new Propietario(dni, nom, email);
-            }
+                vtv = new VTV(pat, p);
+                int i = 0;
+                FormEvaluacion ev;
+                FormVer ver = new FormVer();
+                while (i < vtv.CantidadVerificaciones)
+                {
+                    ev = new FormEvaluacion();
+                    Evaluacion eval = vtv[i];
+                    ev.tBnombre.Text = eval.Nombre;
+                    ev.tBdesc.Text = eval.Descripcion;
+
+                    if (eval is EvaluacionParametrica)
+                    {
+                        EvaluacionParametrica evalu = (EvaluacionParametrica)eval;
+                        ev.lUnidad.Text = evalu.Unidad;
+                        ev.groupBox2.Enabled = false;
+                        ev.tBminimo.Enabled = false;
+                        ev.tBmaximo.Enabled = false;
+                        ev.tBminimo.Text = evalu.ValorMinimo.ToString();
+                        ev.tBmaximo.Text = evalu.ValorMaximo.ToString();
+
+                        if (ev.ShowDialog() == DialogResult.OK)
+                        {
+
+                            double med = Convert.ToDouble(ev.tBmedido.Text);
+                            evalu.ValorMedido = med;
+                        }
+                    }
+                    else
+                    {
+                        EvaluacionSimple evalu = (EvaluacionSimple)eval;
+                        ev.groupBox1.Enabled = false;
+                        if (ev.ShowDialog() == DialogResult.OK)
+                        {
+                            bool correcto = ev.cBfunciona.Checked;
+                            evalu.HaVerificado = correcto;
+                        }
+                    }
+                    ver.tBdatos.Text += eval.ToString();
+                    i++;
+                }
+                ver.tBdatos.Text += FiscalizadorVTV.AgregarVTV(p, pat).ToString();
+                ver.ShowDialog();
+            }                      
             catch (DniInvalidoException ex)
             {
                 MessageBox.Show("Error\n" + ex.Message);
@@ -63,52 +107,14 @@ namespace Ej1
             {
                 MessageBox.Show("Error\n" + ex.Message);
             }
-            DateTime hoy = dateTime.Value;
-            string pat = tBpatente.Text;
-            vtv = new VTV(pat, p);
-            int i = 0;
-            FormEvaluacion ev;
-            FormVer ver = new FormVer();
-            vtv.Fecha = hoy;
-            while (i<vtv.CantidadVerificaciones)
+            catch(EmailInvalidoException ex)
             {
-                ev = new FormEvaluacion();               
-                Evaluacion eval = vtv[i];              
-                ev.tBnombre.Text = eval.Nombre;
-                ev.tBdesc.Text = eval.Descripcion;
-
-                if (eval is EvaluacionParametrica)
-                {
-                    EvaluacionParametrica evalu = (EvaluacionParametrica)eval;
-                    ev.lUnidad.Text = evalu.Unidad;
-                    ev.groupBox2.Enabled = false;                    
-                    ev.tBminimo.Enabled = false;
-                    ev.tBmaximo.Enabled = false;
-                    ev.tBminimo.Text = evalu.ValorMinimo.ToString();
-                    ev.tBmaximo.Text = evalu.ValorMaximo.ToString();
-
-                    if (ev.ShowDialog() == DialogResult.OK)
-                    {
-                        
-                        double med = Convert.ToDouble(ev.tBmedido.Text);
-                        evalu.ValorMedido = med;
-                    }
-                }
-                else
-                {
-                    EvaluacionSimple evalu = (EvaluacionSimple)eval;
-                    ev.groupBox1.Enabled = false;                
-                    if (ev.ShowDialog() == DialogResult.OK)
-                    {
-                        bool correcto = ev.cBfunciona.Checked;
-                        evalu.HaVerificado = correcto;
-                    }
-                }              
-                ver.tBdatos.Text += eval.ToString();
-                i++;                               
+                MessageBox.Show("Error\n" + ex.Message);
             }
-            ver.tBdatos.Text += FiscalizadorVTV.AgregarVTV(p, pat).ToString();
-            ver.ShowDialog();
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message+Environment.NewLine+ ex.StackTrace);
+            }            
         }
 
         private void btnVer_Click(object sender, EventArgs e)
@@ -118,8 +124,7 @@ namespace Ej1
             {
                 ver.tBdatos.Text += FiscalizadorVTV[i].ToString();
             }
-            ver.ShowDialog();
-            
+            ver.ShowDialog();            
         }
     }
 }

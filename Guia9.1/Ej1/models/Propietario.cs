@@ -32,12 +32,12 @@ namespace Ej1.models
             }
             set
             {
-                //Match a = Regex.Match(value, @"^[a-zA-Z0-9]+@+\.[a-zA-Z]{2,}\.com\.[a-zA-Z]{2}$");
-                //if (!a.Success)
-                //{
-                //    throw new EmailInvalidoException();
-                //}
-                //email = value;
+                Match a = Regex.Match(value, @"^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$");
+                if (!a.Success)
+                {
+                    throw new EmailInvalidoException();
+                }
+                email = value;
             }
         }
         public Propietario(int dNI, string apellidoNombres, string email)

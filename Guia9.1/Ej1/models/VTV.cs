@@ -33,7 +33,7 @@ namespace Ej1.models
             get
             {
                 int min = 0;
-                for(int i = 0; i < CantidadVerificaciones; i++)
+                for (int i = 0; i < CantidadVerificaciones; i++)
                 {
                     Evaluacion e = this[i];
                     int valor = (int)e.Evaluar();
@@ -49,16 +49,17 @@ namespace Ej1.models
             string pat = patente.Replace("-", "").Trim().ToUpper();
             Match a = Regex.Match(pat, @"^[A-Z]{2}\d{3}[A-Z]{2}$");
             Match b = Regex.Match(pat, @"^[A-Z]{3}\d{3}$");
+            Fecha = DateTime.Today;
             if (!a.Success && !b.Success)
             {
                 throw new PatenteInvalidaException();
             }
             verificaciones = new List<Evaluacion> {new EvaluacionSimple("Bocina","Funcionamiento correcto"),
-        new EvaluacionParametrica(0.30,1,0.30*0.7,"Porcentaje","Prueba de frenos delanteros","Porcentaje de diferencia de frenado entre ejes"),
-        new EvaluacionParametrica(0.30,1,0.30*0.7,"Porcentaje","Prueba de frenos traseros","Porcentaje de diferencia de frenado entre ejes"),
-        new EvaluacionParametrica(0.0,0.5,0-(0.5*0.3),"Grado","Alineación","Convergencia en grados"),
-        new EvaluacionParametrica(10000,15000,10000*0.7,"Candela","Luces de corto alcante","Intensidad lumínica"),
-        new EvaluacionParametrica(30000,40000,30000*0.7,"Candela","Luces de largo alcante","Intensidad lumínica")};
+        new EvaluacionParametrica(0.30,1,30,"Porcentaje","Prueba de frenos delanteros","Porcentaje de diferencia de frenado entre ejes"),
+        new EvaluacionParametrica(0.30,1,30,"Porcentaje","Prueba de frenos traseros","Porcentaje de diferencia de frenado entre ejes"),
+        new EvaluacionParametrica(0.0,0.5,30,"Grado","Alineación","Convergencia en grados"),
+        new EvaluacionParametrica(10000,15000,30,"Candela","Luces de corto alcante","Intensidad lumínica"),
+        new EvaluacionParametrica(30000,40000,30,"Candela","Luces de largo alcante","Intensidad lumínica")};
         }
         public string[] EmitirComprobante()
         {
