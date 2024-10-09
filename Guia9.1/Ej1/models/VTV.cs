@@ -32,14 +32,19 @@ namespace Ej1.models
         {
             get
             {
-                int min = 0;
-                for (int i = 0; i < CantidadVerificaciones; i++)
+                TipoAprobación t = TipoAprobación.Parcial;
+                foreach(Evaluacion ev in verificaciones)
                 {
-                    Evaluacion e = this[i];
-                    int valor = (int)e.Evaluar();
-                    if (i == 0 || valor < min) min = valor;
+                    if (ev.Evaluar() == TipoAprobación.Aprobado)
+                    {
+                        t= TipoAprobación.Aprobado;
+                    }
+                    if (ev.Evaluar() == TipoAprobación.NoAprobado)
+                    {
+                        t= TipoAprobación.NoAprobado;
+                    }                  
                 }
-                return (TipoAprobación)min;
+                return t;
             }
         }
         public VTV(string patente,Propietario p)
@@ -55,8 +60,8 @@ namespace Ej1.models
                 throw new PatenteInvalidaException();
             }
             verificaciones = new List<Evaluacion> {new EvaluacionSimple("Bocina","Funcionamiento correcto"),
-        new EvaluacionParametrica(0.30,1,30,"Porcentaje","Prueba de frenos delanteros","Porcentaje de diferencia de frenado entre ejes"),
-        new EvaluacionParametrica(0.30,1,30,"Porcentaje","Prueba de frenos traseros","Porcentaje de diferencia de frenado entre ejes"),
+        new EvaluacionParametrica(0,30,30,"Porcentaje","Prueba de frenos delanteros","Porcentaje de diferencia de frenado entre ejes"),
+        new EvaluacionParametrica(0,30,30,"Porcentaje","Prueba de frenos traseros","Porcentaje de diferencia de frenado entre ejes"),
         new EvaluacionParametrica(0.0,0.5,30,"Grado","Alineación","Convergencia en grados"),
         new EvaluacionParametrica(10000,15000,30,"Candela","Luces de corto alcante","Intensidad lumínica"),
         new EvaluacionParametrica(30000,40000,30,"Candela","Luces de largo alcante","Intensidad lumínica")};
