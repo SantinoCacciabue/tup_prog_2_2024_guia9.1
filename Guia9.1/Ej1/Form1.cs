@@ -96,7 +96,8 @@ namespace Ej1
                     ver.tBdatos.Text += eval.ToString();
                     i++;
                 }
-                ver.tBdatos.Text += FiscalizadorVTV.AgregarVTV(p, pat).ToString();
+                ver.tBdatos.Text += vtv.ToString();
+                FiscalizadorVTV.AgregarVTV(p, pat).Aprobacion=vtv.Aprobacion;
                 ver.ShowDialog();
             }                      
             catch (DniInvalidoException ex)
@@ -120,6 +121,7 @@ namespace Ej1
         private void btnVer_Click(object sender, EventArgs e)
         {
             FormVer ver = new FormVer();
+            FiscalizadorVTV.VTVs.Sort();
             for(int i = 0; i < FiscalizadorVTV.CantidadVTV; i++)
             {
                 ver.tBdatos.Text += FiscalizadorVTV[i].ToString();

@@ -22,8 +22,8 @@ namespace Ej1.models
         }
         public override TipoAprobación Evaluar()
         {
-            double valor70 = ValorMaximo * (1 - ValorTolerado / 100);
-            double valor130=ValorMinimo * (1 + ValorTolerado / 100);
+            double valor70 = ValorMinimo * (1 - ValorTolerado / 100);
+            double valor130=ValorMaximo * (1 + ValorTolerado / 100);
             if (ValorMedido < valor70)
             {
                 return TipoAprobación.NoAprobado;

@@ -32,19 +32,24 @@ namespace Ej1.models
         {
             get
             {
-                TipoAprobación t = TipoAprobación.Parcial;
-                foreach(Evaluacion ev in verificaciones)
+                int min = 0;
+                for(int i = 0;i<CantidadVerificaciones;i++)
                 {
-                    if (ev.Evaluar() == TipoAprobación.Aprobado)
+                    Evaluacion ev = verificaciones[i];
+                    if (i == 0)
                     {
-                        t= TipoAprobación.Aprobado;
+                        min = (int)ev.Evaluar();
                     }
-                    if (ev.Evaluar() == TipoAprobación.NoAprobado)
+                    else if ((int)ev.Evaluar() < min)
                     {
-                        t= TipoAprobación.NoAprobado;
-                    }                  
+                        min = (int)ev.Evaluar();
+                    }
                 }
-                return t;
+                return (TipoAprobación)min;
+            }
+            set
+            {
+                _ = value;
             }
         }
         public VTV(string patente,Propietario p)
@@ -54,7 +59,7 @@ namespace Ej1.models
             string pat = patente.Replace("-", "").Trim().ToUpper();
             Match a = Regex.Match(pat, @"^[A-Z]{2}\d{3}[A-Z]{2}$");
             Match b = Regex.Match(pat, @"^[A-Z]{3}\d{3}$");
-            Fecha = DateTime.Today;
+            Fecha = DateTime.Now;
             if (!a.Success && !b.Success)
             {
                 throw new PatenteInvalidaException();
@@ -92,7 +97,7 @@ namespace Ej1.models
             int i = 0;
             while (i < 20)
             {
-                if (fecha.DayOfWeek != DayOfWeek.Sunday || fecha.DayOfWeek != DayOfWeek.Saturday)
+                if (fecha.DayOfWeek != DayOfWeek.Sunday | fecha.DayOfWeek != DayOfWeek.Saturday)
                 {
                     i++;
                 }
